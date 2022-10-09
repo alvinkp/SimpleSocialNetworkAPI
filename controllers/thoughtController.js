@@ -71,11 +71,11 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // Add a friend to thought
+  // Add a reaction to a thought
   addReaction(req, res) {
     Thought.findOneAndUpdate(
-      { _id: req.params.userId },
-      { $addToSet: { friends: req.params.friendId } }
+      { _id: req.params.thoughtId },
+      { $addToSet: { reactions: req.body } }
     )
       .then((thought) =>
         !thought
@@ -84,11 +84,11 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // Remove a friend from thought
+  // Remove a reaction from a thought
   removeReaction(req, res) {
     Thought.findOneAndUpdate(
-      { _id: req.params.userId },
-      { $pull: { friends: req.params.friendId } }
+      { _id: req.params.thoughtId },
+      { $pull: { reactions: { reactionId: req.params.reactionId } } }
     )
       .then((thought) =>
         !thought
