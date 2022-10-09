@@ -61,6 +61,16 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
+  // Remove a thought
+  removeThought(req, res) {
+    Thought.findOneAndRemove({ _id: req.params.thoughtId })
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: "No thought found with that ID" })
+          : res.json(thought)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
   // Add a friend to thought
   addReaction(req, res) {
     Thought.findOneAndUpdate(
