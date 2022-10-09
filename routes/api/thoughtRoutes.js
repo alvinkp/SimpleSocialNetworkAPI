@@ -9,7 +9,7 @@ const {
 } = require("../../controllers/thoughtController");
 
 router.route("/").get(getThoughts).post(postNewThought);
-router.route("/:postId").get(getSingleThought).put(updateThought);
+router.route("/:thoughtId").get(getSingleThought).put(updateThought);
 router
   .route("/:userId/thoughts/:thoughtId")
   .post(addReaction)
